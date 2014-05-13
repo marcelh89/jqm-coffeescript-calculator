@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jquery Mobile Calculator</title>
+  <link rel="stylesheet" href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.2.min.css">
+  <script src="bower_components/jquery/jquery.min.js"></script>
+  <script src="bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.2.min.js"></script>
+  <script src="bower_components/require-cs/coffee-script.js"></script>
+
+ <script type="text/coffeescript">
+
+userinput = ""
+
+$(document).on 'click', ':button', (event) ->
+
+  option = $(this).text()
+
+  switch option
+   when "=" then calcResult()
+   when "C" then clearResult()
+   else  
+     userinput = userinput + option
+     updateCalcField()
+
+updateCalcField = ->
+  $("#calcfield").val userinput
+  return
+
+clearResult = ->
+  userinput = ""
+  updateCalcField()
+
+calcResult = ->
+  try
+    result = eval(userinput) 
+    userinput = result
+  catch err
+    userinput = "fehlerhafte Eingabe"
+  updateCalcField()
+  return
+
+</script>
+
+</head>
+<body>
+  <main role="main" class="ui-content">
+ 
+  <h1>simple calculator</h1>
+
+  <div class="ui-grid-solo">
+    <input type="text" id="calcfield" readonly="readonly">
+  </div>
+
+  <div class="ui-grid-d">
+    <div class="ui-block-a"><button>7</button></div>
+    <div class="ui-block-b"><button>8</button></div>
+    <div class="ui-block-c"><button>9</button></div>
+    <div class="ui-block-d"><button>+</button></div>
+  </div>
+
+  <div class="ui-grid-d">
+    <div class="ui-block-a"><button>4</button></div>
+    <div class="ui-block-b"><button>5</button></div>
+    <div class="ui-block-c"><button>6</button></div>
+    <div class="ui-block-d"><button>-</button></div>
+  </div>
+
+  <div class="ui-grid-d">
+    <div class="ui-block-a"><button>1</button></div>
+    <div class="ui-block-b"><button>2</button></div>
+    <div class="ui-block-c"><button>3</button></div>
+    <div class="ui-block-d"><button>*</button></div>
+  </div>
+
+  <div class="ui-grid-d">
+    <div class="ui-block-a"><button>0</button></div>
+    <div class="ui-block-b"><button>.</button></div>
+    <div class="ui-block-c"><button>=</button></div>
+    <div class="ui-block-d"><button>/</button></div>
+  </div>
+
+  <div class="ui-grid-d">
+    <div class="ui-block-a"><button>C</button></div>
+  </div>
+
+  </main>
+</body>
+
+</html>
