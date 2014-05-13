@@ -18,27 +18,27 @@ $(document).on 'click', ':button', (event) ->
   option = $(this).text()
 
   switch option
-   when "=" then calcResult()
-   when "C" then clearResult()
+   when "=" then calculate()
+   when "C" then clearScreen()
    else  
      userinput = userinput + option
-     updateCalcField()
+     update()
 
-updateCalcField = ->
+update = ->
   $("#calcfield").val userinput
   return
 
-clearResult = ->
+clearScreen = ->
   userinput = ""
-  updateCalcField()
+  update()
 
-calcResult = ->
+calculate = ->
   try
     result = eval(userinput) 
     userinput = result
   catch err
     userinput = "fehlerhafte Eingabe"
-  updateCalcField()
+  update()
   return
 
 </script>
